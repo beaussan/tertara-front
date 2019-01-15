@@ -2,20 +2,25 @@ import { Injectable } from '@angular/core';
 import {interval, merge, Observable, of} from 'rxjs';
 import {Form, Question} from '../types/form';
 import {HttpClient} from '@angular/common/http';
-import {map, mergeMap, share} from 'rxjs/operators';
+import {map, mergeMap, share, shareReplay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormWatcherService {
 
+  private formObservable: Observable<Form>;
+
   constructor(private readonly httpClient: HttpClient) { }
 
   getForm(): Observable<Form> {
-    return merge(interval(1000), of('')).pipe(
-      mergeMap(() => this.httpClient.get<Form>('/forms/latest')),
-      share(),
-    );
+    if (!this.formObservable) {
+      this.formObservable =  merge(interval(1800), of('')).pipe(
+        mergeMap(() => this.httpClient.get<Form>('/forms/latest')),
+        share(),
+      );
+    }
+    return this.formObservable;
   }
 
   isFormOver(): Observable<boolean> {
