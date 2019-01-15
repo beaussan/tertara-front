@@ -7,6 +7,7 @@ import { PrefixerInterceptor } from './http/prefixer.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { PresentatorModule } from './presentator/presentator.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { PresentatorModule } from './presentator/presentator.module';
     PresentatorModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
