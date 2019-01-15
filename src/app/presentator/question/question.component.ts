@@ -1,19 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {CalculatedAnswer, Question} from '../../types/form';
-import {FormWatcherService} from '../../services/form-watcher.service';
-import {Router} from '@angular/router';
-import {PresControllService} from '../services/pres-controll.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { CalculatedAnswer, Question } from '../../types/form';
+import { FormWatcherService } from '../../services/form-watcher.service';
+import { Router } from '@angular/router';
+import { PresControllService } from '../services/pres-controll.service';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit, OnDestroy  {
-
-
-
+export class QuestionComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   currentQuestion$: Observable<Question>;
@@ -22,20 +19,24 @@ export class QuestionComponent implements OnInit, OnDestroy  {
 
   isQuestionsOver$: Observable<boolean>;
 
-
-  constructor(private readonly formService: FormWatcherService, private readonly router: Router, private readonly constroller: PresControllService) {
+  constructor(
+    private readonly formService: FormWatcherService,
+    private readonly router: Router,
+    private readonly constroller: PresControllService,
+  ) {
     this.currentQuestion$ = this.formService.getCurrentQuestion();
     this.answerForCurrent$ = this.constroller.getAnswerFromLatestQuestion();
     this.isQuestionsOver$ = this.formService.isAllQuestionsOver();
   }
 
-
   ngOnInit() {
-    this.subscription.add(this.formService.isFormOver().subscribe(val => {
-      if (val) {
-        this.router.navigate(['/thanks']);
-      }
-    }));
+    this.subscription.add(
+      this.formService.isFormOver().subscribe(val => {
+        if (val) {
+          this.router.navigate(['/thanks']);
+        }
+      }),
+    );
   }
 
   finishForm() {
@@ -49,5 +50,4 @@ export class QuestionComponent implements OnInit, OnDestroy  {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

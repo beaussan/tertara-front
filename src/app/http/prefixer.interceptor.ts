@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PrefixerInterceptor implements HttpInterceptor {
-
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler,

@@ -7,10 +7,11 @@ import { QuestionPublicComponent } from './question-public/question-public.compo
 import { ContactPublicComponent } from './contact-public/contact-public.component';
 
 @NgModule({
-  declarations: [HomePublicComponent, QuestionPublicComponent, ContactPublicComponent],
-  imports: [
-    CommonModule,
-    PublicRoutingModule
-  ]
+  declarations: [
+    HomePublicComponent,
+    QuestionPublicComponent,
+    ContactPublicComponent,
+  ],
+  imports: [CommonModule, PublicRoutingModule],
 })
-export class PublicModule { }
+export class PublicModule {}

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomePublicComponent} from './home-public/home-public.component';
-import {QuestionPublicComponent} from './question-public/question-public.component';
-import {ContactPublicComponent} from './contact-public/contact-public.component';
+import { HomePublicComponent } from './home-public/home-public.component';
+import { QuestionPublicComponent } from './question-public/question-public.component';
+import { ContactPublicComponent } from './contact-public/contact-public.component';
 
 const routes: Routes = [
   {
@@ -16,11 +16,11 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactPublicComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PublicRoutingModule { }
+export class PublicRoutingModule {}

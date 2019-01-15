@@ -8,10 +8,12 @@ import { AdminComponent } from './admin/admin.component';
 import { ThanksComponent } from './thanks/thanks.component';
 
 @NgModule({
-  declarations: [StartingComponent, QuestionComponent, AdminComponent, ThanksComponent],
-  imports: [
-    CommonModule,
-    PresentatorRoutingModule
-  ]
+  declarations: [
+    StartingComponent,
+    QuestionComponent,
+    AdminComponent,
+    ThanksComponent,
+  ],
+  imports: [CommonModule, PresentatorRoutingModule],
 })
-export class PresentatorModule { }
+export class PresentatorModule {}

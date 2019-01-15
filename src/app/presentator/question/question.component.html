@@ -1,23 +1,17 @@
-<div>
-  QUESTION PRES PAGE !
-</div>
+<div>QUESTION PRES PAGE !</div>
 
-<div *ngIf="currentQuestion$ | async as question; else loading">
-  <div> {{question.title}} </div>
+<div *ngIf="(currentQuestion$ | async) as question; else loading">
+  <div>{{ question.title }}</div>
 
-  <div>QID : {{question.id}} </div>
+  <div>QID : {{ question.id }}</div>
 
   <ol *ngIf="!question.ignoreResponse; else ignoreResponce">
     RESP
   </ol>
 
-
   <ng-template #ignoreResponce>DON T CARE</ng-template>
 
-
-  <div>
-    HELLO THERE
-  </div>
+  <div>HELLO THERE</div>
   <pre>
     {{ answerForCurrent$ | async | json }}
   </pre>
@@ -26,7 +20,7 @@
 </div>
 
 <ng-template #loading>
-  <ng-container *ngIf="isQuestionsOver$ | async; else trueLoading">
+  <ng-container *ngIf="(isQuestionsOver$ | async); else trueLoading">
     La réponce est BRAVO !
 
     <button (click)="finishForm()">Back to the future</button>
