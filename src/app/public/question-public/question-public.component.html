@@ -1,0 +1,21 @@
+<div>
+  QUESTION PAGE !
+</div>
+
+<div *ngIf="currentQuestion$ | async as question; else loading">
+  <div> NOT SHOWN : {{question.title}} </div>
+
+  <div>QID : {{question.id}} </div>
+
+  <div *ngIf="question.id === lastIdAnswered"> ALREADY ANSWERED</div>
+
+  <ol *ngIf="!question.ignoreResponse; else ignoreResponce">
+    <li *ngFor="let answer of question.answerPossibilities" (click)="answerToQuestion(question, answer)">{{answer.value}}</li>
+  </ol>
+
+  <ng-template #ignoreResponce>DON T CARE</ng-template>
+
+
+</div>
+
+<ng-template #loading>LOADINIG</ng-template>
