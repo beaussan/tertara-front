@@ -9,11 +9,4 @@ import { FormWatcherService } from './services/form-watcher.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'tertara-front';
-
-  form$: Observable<Form>;
-
-  constructor(private readonly formService: FormWatcherService) {
-    this.form$ = formService.getForm();
-  }
 }
