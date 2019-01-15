@@ -3,6 +3,7 @@ import {FormWatcherService} from '../../services/form-watcher.service';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {AnswerPossibility, Question} from '../../types/form';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-question-public',
@@ -15,6 +16,9 @@ export class QuestionPublicComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   currentQuestion$: Observable<Question>;
+
+  isQuestionsOver$: Observable<boolean>;
+
 
   get lastIdAnswered(): number {
     const count_str = localStorage.getItem('count');
@@ -31,9 +35,10 @@ export class QuestionPublicComponent implements OnInit, OnDestroy {
   }
 
 
-  constructor(private readonly formService: FormWatcherService, private readonly router: Router) {
+  constructor(private readonly formService: FormWatcherService, private readonly httpClient: HttpClient, private readonly router: Router) {
     this.currentQuestion$ = this.formService.getCurrentQuestion();
     this.lastIdAnswered = 0;
+    this.isQuestionsOver$ = this.formService.isAllQuestionsOver();
   }
 
 
@@ -51,8 +56,10 @@ export class QuestionPublicComponent implements OnInit, OnDestroy {
   }
 
   answerToQuestion(question: Question, answer: AnswerPossibility): void {
-    // TODO API CALL
     this.lastIdAnswered = question.id;
+    if (!question.ignoreResponse) {
+      this.httpClient.post(`/questions/${question.id}/answers`, answer).subscribe(() => {});
+    }
   }
 
 }

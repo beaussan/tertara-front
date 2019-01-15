@@ -1,26 +1,35 @@
 <div>
-  QUESTION PAGE !
+  QUESTION PRES PAGE !
 </div>
 
 <div *ngIf="currentQuestion$ | async as question; else loading">
-  <div> NOT SHOWN : {{question.title}} </div>
+  <div> {{question.title}} </div>
 
   <div>QID : {{question.id}} </div>
 
-  <div *ngIf="question.id === lastIdAnswered"> ALREADY ANSWERED</div>
-
   <ol *ngIf="!question.ignoreResponse; else ignoreResponce">
-    <li *ngFor="let answer of question.answerPossibilities" (click)="answerToQuestion(question, answer)">{{answer.value}}</li>
+    RESP
   </ol>
+
 
   <ng-template #ignoreResponce>DON T CARE</ng-template>
 
 
+  <div>
+    HELLO THERE
+  </div>
+  <pre>
+    {{ answerForCurrent$ | async | json }}
+  </pre>
+
+  <button (click)="goToNextQuestion()">next !</button>
 </div>
 
 <ng-template #loading>
   <ng-container *ngIf="isQuestionsOver$ | async; else trueLoading">
-    ... attente
+    La réponce est BRAVO !
+
+    <button (click)="finishForm()">Back to the future</button>
   </ng-container>
 
   <ng-template #trueLoading>LOADING</ng-template>

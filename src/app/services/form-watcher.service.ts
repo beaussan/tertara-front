@@ -39,4 +39,11 @@ export class FormWatcherService {
       map(arr => arr[0]),
     );
   }
+
+  isAllQuestionsOver(): Observable<boolean> {
+    return this.getForm().pipe(
+      map(form => form.questions),
+      map(arr => arr.reduce((acc, curr) => acc && curr.terminated, true))
+    );
+  }
 }

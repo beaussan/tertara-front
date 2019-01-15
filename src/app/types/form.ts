@@ -19,3 +19,23 @@ export interface AnswerPossibility {
   id: number;
   value: string;
 }
+
+export interface ApiAnswer {
+  id: number;
+  answerValue: AnswerPossibility;
+}
+
+export interface CalculatedAnswer {
+  count: number;
+  value: string;
+}
+/*
+{
+    "id": 1451,
+    "answerValue": {
+      "id": 2841,
+      "value": "NON"
+    }
+  },
+  {
+ */
