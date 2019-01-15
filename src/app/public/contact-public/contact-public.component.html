@@ -1,1 +1,56 @@
-GIVE TO ME YOUR CONTACT ADDRES PLEASEEEEE
+<div fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+  <ng-container *ngIf="!hasSendEmail; else thanks">
+    <img src="assets/svg/ask_mail.svg" alt="demande email svg" />
+
+    <form
+      name="loginForm"
+      [formGroup]="loginForm"
+      novalidate
+      fxLayout="column"
+      fxLayoutAlign="space-around center"
+      fxFlex
+    >
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" autocomplete="email" />
+        <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+        <mat-error *ngIf="loginForm.get('email').hasError('required')">
+          L'email est requis
+        </mat-error>
+        <mat-error
+          *ngIf="
+            !loginForm.get('email').hasError('required') &&
+            loginForm.get('email').hasError('email')
+          "
+        >
+          Entrez une addresse email valide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error *ngIf="emailInUse"> Cet email existe déjà </mat-error>
+
+      <mat-checkbox formControlName="newsletter"
+        >Recevoir la newsletter</mat-checkbox
+      >
+
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="submit-button"
+          aria-label="LOGIN"
+          [disabled]="loginForm.invalid"
+          (click)="submitForm()"
+        >
+          S'enregistrer
+        </button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template #thanks>
+    <h1>Merci !</h1>
+    <h2>Et a bientôt !</h2>
+    <div>L'équipe de PEAR</div>
+    <img src="assets/svg/thanks.svg" alt="merci svg" />
+  </ng-template>
+</div>

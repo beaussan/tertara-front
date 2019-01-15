@@ -54,21 +54,21 @@ export class PresControllService {
       ),
       map<[ApiAnswer[], Question], CalculatedAnswer[]>(([arr, question]) => {
         const initialArray = question.answerPossibilities.map(answ => ({
-          count: 0,
-          value: answ.value,
+          value: 0,
+          name: answ.value,
         }));
         return arr.reduce((acc: CalculatedAnswer[], obj) => {
           const idFound = acc.findIndex(
-            val => val.value === obj.answerValue.value,
+            val => val.name === obj.answerValue.value,
           );
           if (idFound === -1) {
-            return [...acc, { count: 1, value: obj.answerValue.value }];
+            return [...acc, { value: 1, name: obj.answerValue.value }];
           } else {
             return acc.map(item => {
-              if (item.value === obj.answerValue.value) {
+              if (item.name === obj.answerValue.value) {
                 return {
-                  value: item.value,
-                  count: item.count + 1,
+                  name: item.name,
+                  value: item.value + 1,
                 };
               }
               return item;

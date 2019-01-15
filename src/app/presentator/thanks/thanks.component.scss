@@ -1,0 +1,19 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 60vw;
+  max-width: 500px;
+  max-height: 500px;
+  height: 60vh;
+}
+
+h1 {
+  max-width: 80vw;
+  text-align: center;
+}
+

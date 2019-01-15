@@ -1,27 +1,58 @@
-<div>QUESTION PAGE !</div>
+<div fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+  <ng-container *ngIf="(currentQuestion$ | async) as question; else loading">
+    <ng-container *ngIf="question.id !== lastIdAnswered; else responceSend">
+      <ng-container *ngIf="!question.ignoreResponse; else ignoreResponce">
+        <div class="button-container">
+          <button
+            *ngFor="let answer of question.answerPossibilities"
+            mat-raised-button
+            color="primary"
+            class="m-10"
+            (click)="answerToQuestion(question, answer)"
+          >
+            {{ answer.value }}
+          </button>
+        </div>
+      </ng-container>
 
-<div *ngIf="(currentQuestion$ | async) as question; else loading">
-  <div>NOT SHOWN : {{ question.title }}</div>
+      <ng-template #ignoreResponce>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              [placeholder]="'Réponse'"
+              maxlength="20"
+              #input
+              (input)="input.value = $event.target.value.toUpperCase()"
+            />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            class="m-10"
+            (click)="answerToQuestion(question, null)"
+          >Envoyer !</button>
+        </div>
+      </ng-template>
+    </ng-container>
 
-  <div>QID : {{ question.id }}</div>
-
-  <div *ngIf="question.id === lastIdAnswered">ALREADY ANSWERED</div>
-
-  <ol *ngIf="!question.ignoreResponse; else ignoreResponce">
-    <li
-      *ngFor="let answer of question.answerPossibilities"
-      (click)="answerToQuestion(question, answer)"
-    >
-      {{ answer.value }}
-    </li>
-  </ol>
-
-  <ng-template #ignoreResponce>DON T CARE</ng-template>
+    <ng-template #responceSend>
+      <div class="waiting">
+        <div class="stronger m-b-10">Votre réponse a été envoyé</div>
+        <div>Veuillez attendre la question suivante</div>
+        <img src="assets/svg/mail.svg" alt="waiting image" />
+      </div>
+    </ng-template>
+  </ng-container>
 </div>
 
 <ng-template #loading>
   <ng-container *ngIf="(isQuestionsOver$ | async); else trueLoading">
-    ... attente
+    <div class="waiting">
+      <div class="stronger m-b-10">Votre réponse a été envoyé</div>
+      <div>Veuillez attendre la question suivante</div>
+      <img src="assets/svg/mail.svg" alt="waiting image" />
+    </div>
   </ng-container>
 
   <ng-template #trueLoading>LOADING</ng-template>

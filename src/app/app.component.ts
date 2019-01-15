@@ -8,5 +8,4 @@ import { FormWatcherService } from './services/form-watcher.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-}
+export class AppComponent {}

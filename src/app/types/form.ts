@@ -25,8 +25,8 @@ export interface ApiAnswer {
 }
 
 export interface CalculatedAnswer {
-  count: number;
-  value: string;
+  value: number;
+  name: string;
 }
 /*
 {

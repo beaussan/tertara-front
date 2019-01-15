@@ -5,6 +5,15 @@ import { PublicRoutingModule } from './public-routing.module';
 import { HomePublicComponent } from './home-public/home-public.component';
 import { QuestionPublicComponent } from './question-public/question-public.component';
 import { ContactPublicComponent } from './contact-public/contact-public.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+} from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +21,19 @@ import { ContactPublicComponent } from './contact-public/contact-public.componen
     QuestionPublicComponent,
     ContactPublicComponent,
   ],
-  imports: [CommonModule, PublicRoutingModule],
+  imports: [
+    CommonModule,
+    PublicRoutingModule,
+    FlexLayoutModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+  ],
 })
 export class PublicModule {}

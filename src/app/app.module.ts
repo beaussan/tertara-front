@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { PresentatorModule } from './presentator/presentator.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PublicModule,
     PresentatorModule,
     AppRoutingModule,
+    FlexLayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
   ],

@@ -1,30 +1,48 @@
-<div>QUESTION PRES PAGE !</div>
+<div
+  fxLayout="column" fxLayoutAlign="space-around center" fxFlex
+>
+  <ng-container *ngIf="(currentQuestion$ | async) as question; else loading">
 
-<div *ngIf="(currentQuestion$ | async) as question; else loading">
-  <div>{{ question.title }}</div>
+    <h1>{{ question.title }}</h1>
 
-  <div>QID : {{ question.id }}</div>
+    <ng-container *ngIf="!question.ignoreResponse; else ignoreResponce">
 
-  <ol *ngIf="!question.ignoreResponse; else ignoreResponce">
-    RESP
-  </ol>
+      <div class="graph">
+        <ngx-charts-bar-vertical
+          [scheme]="colorScheme"
+          [results]="answerForCurrent$ | async "
+          [gradient]="false"
+          [legend]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true">
+        </ngx-charts-bar-vertical>
+      </div>
 
-  <ng-template #ignoreResponce>DON T CARE</ng-template>
+    </ng-container>
 
-  <div>HELLO THERE</div>
-  <pre>
-    {{ answerForCurrent$ | async | json }}
-  </pre>
+    <ng-template #ignoreResponce>
+      <div>
+        Collecte des réponces en cours...
+      </div>
+      <img src="assets/svg/collect.svg" alt="collecting answers"/>
+    </ng-template>
 
-  <button (click)="goToNextQuestion()">next !</button>
-</div>
-
-<ng-template #loading>
-  <ng-container *ngIf="(isQuestionsOver$ | async); else trueLoading">
-    La réponce est BRAVO !
-
-    <button (click)="finishForm()">Back to the future</button>
+    <button mat-raised-button color="primary" (click)="goToNextQuestion()">Next</button>
   </ng-container>
 
-  <ng-template #trueLoading>LOADING</ng-template>
-</ng-template>
+
+  <ng-template #loading>
+    <ng-container *ngIf="(isQuestionsOver$ | async); else trueLoading">
+      <h2>Et la réponse est...</h2>
+      <h1 class="stronger" [@bounce]="bounce">BRAVO</h1>
+      <button mat-raised-button color="primary" (click)="finishForm()">Next</button>
+    </ng-container>
+
+    <ng-template #trueLoading>LOADING</ng-template>
+  </ng-template>
+
+
+
+</div>
