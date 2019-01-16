@@ -7,7 +7,7 @@ import { QuestionComponent } from './question/question.component';
 import { AdminComponent } from './admin/admin.component';
 import { ThanksComponent } from './thanks/thanks.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
@@ -22,6 +22,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     PresentatorRoutingModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     NgxChartsModule,
   ],
 })

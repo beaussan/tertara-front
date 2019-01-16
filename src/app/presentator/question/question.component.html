@@ -40,7 +40,9 @@
       <button mat-raised-button color="primary" (click)="finishForm()">Next</button>
     </ng-container>
 
-    <ng-template #trueLoading>LOADING</ng-template>
+    <ng-template #trueLoading>
+      <mat-spinner color="primary" strokeWidth="3" diameter="100" mode="indeterminate"></mat-spinner>
+    </ng-template>
   </ng-template>
 
 
